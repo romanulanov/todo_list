@@ -1,0 +1,7 @@
+{% extends 'base/main.html' %}
+{% block content %}
+<a href ="{% url 'tasks' %}"> Назад</a>
+<h1>Задачка:{{task}}</h1>
+<h2>Описание:<br>{{task.description}}</h2>
+<td> Дата создания: {{task.create}}</td>
+{% endblock content %}

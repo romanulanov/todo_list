@@ -1,0 +1,33 @@
+{% extends 'base/main.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<p>{{request.user}}</p>
+<a href="{% url 'logout' %}">Разлогиниться</a>
+{% else %}
+<a href="{% url 'login' %}">Войти</a>
+{% endif %}
+<h1>Мой список задачек {{color}}</h1>
+<a href ="{% url 'task-create' %}">Добавить задачку</a>
+
+<form method="GET">
+    <input type="text" name='search-area' value="{{search_input}}">
+    <input type="submit" value='Поиск'>
+</form>
+<table>
+    <tr>
+        <th>Задачки</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>
+        <td><a href ="{% url 'task' task.id %}">Посмотреть</td>
+        <td><a href ="{% url 'task-update' task.id %}">Изменить</td>    
+        <td><a href ="{% url 'task-delete' task.id %}">Удалить</td>    
+    </tr>
+    {% empty %}
+    <h3>Нет задачек</h3>
+    {% endfor %}
+</table>
+            
+{% endblock content %}
+
